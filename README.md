@@ -16,7 +16,7 @@ Aqui é onde a mágica acontece. O sistema gera códigos únicos para cada link.
 
 ### Lógica de Redirecionamento (Backend)
 Desenvolvido com foco em performance e segurança contra SQL Injection.
-![Code Logic](screenshots/code.png)
+![Code Logic](screenshots/r.png)
 
 ## 🔒 Segurança
 O sistema conta com um painel administrativo protegido por sessões e as senhas são criptografadas usando `password_hash` do PHP.
