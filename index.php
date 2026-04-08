@@ -12,7 +12,7 @@
     </nav>
     <div class="container" style="text-align: center; margin-top: 15vh;">
         <h1 style="font-size: 3.5rem;">Crie Links <span>Inteligentes</span></h1>
-        <p style="color: var(--text-gray);">Sistema exclusivo para gestão de tráfego 3n Host e VibeMC.</p>
+        <p style="color: var(--text-gray);">Sistema exclusivo para gestão de tráfego 3n Host .</p>
         <br>
         <a href="login.php" style="background: var(--primary); padding: 15px 30px; border-radius: 50px; color: white; text-decoration: none; font-weight: bold;">Começar Agora</a>
     </div>
