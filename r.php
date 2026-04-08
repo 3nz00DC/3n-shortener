@@ -1,17 +1,10 @@
-<?php
-require 'core/config.php';
-$codigo = $_GET['c'] ?? '';
+if ($link) {
+    // Aqui o código pega a URL que está salva no seu banco de dados
+    $url_destino = $link['https://3nz00dc.github.io/3n-shortener/']; 
 
-if ($codigo) {
-    $stmt = $pdo->prepare("SELECT url_original FROM links WHERE codigo_curto = ?");
-    $stmt->execute([$codigo]);
-    $link = $stmt->fetch();
+    // Se você quiser que TODOS os links vão para um lugar só (ex: seu Discord)
+    // basta trocar a linha acima por: $url_destino = "https://dc.gg/3nhost.com";
 
-    if ($link) {
-        $pdo->prepare("UPDATE links SET cliques = cliques + 1 WHERE codigo_curto = ?")->execute([$codigo]);
-        header("Location: " . $link['url_original']);
-        exit;
-    }
+    header("Location: " . $url_destino);
+    exit;
 }
-echo "Link expirado ou inexistente.";
-?>
