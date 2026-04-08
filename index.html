@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecionando... | 3n Host</title>
+    <style>
+        body { background: #0f0f13; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .card { text-align: center; background: #1a1a24; padding: 40px; border-radius: 15px; border: 1px solid #5865F2; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #5865F2; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .btn { display: none; background: #5865F2; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="assets/img/logo.png" width="80">
+        <h2>Você está saindo da 3n Host</h2>
+        <p>Aguarde 5 segundos para ser redirecionado...</p>
+        <div class="loader" id="loader"></div>
+        <a href="<?php echo $url_destino; ?>" class="btn" id="btn">Ir para o site agora</a>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('btn').style.display = 'inline-block';
+            // Opcional: Redirecionar automático após os 5s
+            // window.location.href = "<?php echo $url_destino; ?>";
+        }, 5000);
+    </script>
+</body>
+</html>
