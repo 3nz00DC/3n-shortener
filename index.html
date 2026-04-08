@@ -2,31 +2,135 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Redirecionando... | 3n Host</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3n Shortener | Gestão de Links</title>
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
     <style>
-        body { background: #0f0f13; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .card { text-align: center; background: #1a1a24; padding: 40px; border-radius: 15px; border: 1px solid #5865F2; }
-        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #5865F2; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 20px auto; }
+        :root {
+            --bg: #0f0f13;
+            --card: #1a1a24;
+            --primary: #5865F2;
+            --text: #ffffff;
+            --gray: #aaa;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Layout da Landing Page */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo-main { width: 120px; margin-bottom: 20px; }
+        
+        h1 { font-size: 3rem; margin: 0; }
+        h1 span { color: var(--primary); }
+        p { color: var(--gray); font-size: 1.2rem; max-width: 600px; }
+
+        .btn-panel {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-panel:hover { transform: scale(1.05); background: #4752c4; }
+
+        /* Estilo Modo dc.gg (Redirecionamento) */
+        #redirect-screen {
+            display: none; /* Escondido por padrão */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader {
+            border: 4px solid #333;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px 0;
+        }
+
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .btn { display: none; background: #5865F2; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+
+        #timer { font-weight: bold; color: var(--primary); font-size: 1.5rem; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <img src="assets/img/logo.png" width="80">
+
+    <div id="home-screen" class="hero">
+        <img src="assets/img/logo.png" alt="3n Logo" class="logo-main">
+        <h1>3n <span>Shortener</span></h1>
+        <p>Sistema de encurtamento de URLs robusto para a 3n Host e VibeMC.</p>
+        <a href="login.php" class="btn-panel">Acessar Painel Admin</a>
+    </div>
+
+    <div id="redirect-screen">
+        <img src="assets/img/logo.png" alt="3n Logo" width="80">
         <h2>Você está saindo da 3n Host</h2>
-        <p>Aguarde 5 segundos para ser redirecionado...</p>
-        <div class="loader" id="loader"></div>
-        <a href="3nhost.com" class="btn" id="btn">Ir para o site agora</a>
+        <p>Aguarde <span id="timer">5</span> segundos...</p>
+        <div class="loader"></div>
+        <p style="font-size: 0.9rem; color: var(--gray);">Verificando segurança do destino...</p>
     </div>
 
     <script>
-        setTimeout(() => {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('btn').style.display = 'inline-block';
-            // Opcional: Redirecionar automático após os 5s
-            // window.location.href = "<?php echo $url_destino; ?>";
-        }, 5000);
+        // Lógica para detectar se é um link encurtado
+        const urlParams = new URLSearchParams(window.location.search);
+        const codigo = urlParams.get('c');
+
+        if (codigo) {
+            // MODO REDIRECIONADOR ATIVO
+            document.getElementById('home-screen').style.display = 'none';
+            document.getElementById('redirect-screen').style.display = 'flex';
+
+            let tempo = 5;
+            const timerElement = document.getElementById('timer');
+
+            // Aqui você define para onde cada código leva
+            // Em um sistema real, você buscaria isso no Supabase
+            const destinos = {
+                "dicord": "https://dc.gg/3nhost.com",
+                "host": "https://3nhost.com",
+                "github": "https://github.com/3nz00dc"
+            };
+
+            const urlFinal = destinos[codigo] || "https://github.com/3nz00dc";
+
+            const interval = setInterval(() => {
+                tempo--;
+                timerElement.innerText = tempo;
+
+                if (tempo <= 0) {
+                    clearInterval(interval);
+                    window.location.href = urlFinal;
+                }
+            }, 1000);
+        }
     </script>
 </body>
 </html>
