@@ -12,7 +12,7 @@ Um encurtador de URLs robusto e seguro, desenvolvido para integrar o ecossistema
 
 ### Dashboard Principal
 Aqui é onde a mágica acontece. O sistema gera códigos únicos para cada link.
-![Dashboard Preview](https://github.com/3nz00DC/3n-shortener/blob/codespace-verbose-space-carnival-g4rgxgwx4vpwcv7r4/dasboard.png?raw=true)
+![Dashboard Preview](https://github.com/3nz00DC/3n-shortener/blob/codespace-verbose-space-carnival-g4rgxgwx4vpwcv7r4/dashboard.png?raw=true)
 
 ### Lógica de Redirecionamento (Backend)
 Desenvolvido com foco em performance e segurança contra SQL Injection.
