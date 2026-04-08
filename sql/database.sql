@@ -1,0 +1,20 @@
+CREATE DATABASE IF NOT EXISTS encurtador;
+USE encurtador;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS links (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    url_original TEXT NOT NULL,
+    codigo_curto VARCHAR(10) NOT NULL UNIQUE,
+    cliques INT DEFAULT 0,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Senha padrão: 123
+INSERT INTO usuarios (usuario, senha) VALUES ('3n', '$2y$10$eImiTXuWVxfM37uY4JANjOL.oMzVHrU.876H.pYjWl9uO5lUfX.f6') 
+ON DUPLICATE KEY UPDATE usuario=usuario;
